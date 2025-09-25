@@ -6,7 +6,6 @@ Authors: Kenny Lau
 
 import EllipticCurve.AlgebraicGeometry.BigAffineZariski
 import EllipticCurve.CategoryTheory.PresheafCostructured
-import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # The Category of Commutative Rings Over a Scheme

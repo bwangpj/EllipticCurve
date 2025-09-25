@@ -6,10 +6,12 @@ Authors: Kenny Lau
 
 import EllipticCurve.CategoryTheory.EqualizerCorepresentable
 import EllipticCurve.Lemmas
+import EllipticCurve.AlgebraicGeometry.OverScheme
 import Mathlib.Algebra.Category.Ring.Under.Basic
 import Mathlib.CategoryTheory.Comma.Over.Basic
 import Mathlib.CategoryTheory.Limits.Over
 import Mathlib.CategoryTheory.Limits.Types.Shapes
+import Mathlib.CategoryTheory.Sites.Sheaf
 import Mathlib.CategoryTheory.WithTerminal.Cone
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
@@ -289,6 +291,13 @@ Given an `R`-algebra `A`, we return the set `G(k, A ⊗[R] M; A)`. -/
   map f := map (CommRingCat.toAlgHom f)
   map_id _ := funext map_id
   map_comp f g := funext (map_comp (CommRingCat.toAlgHom f) (CommRingCat.toAlgHom g))
+
+open AlgebraicGeometry CommRingCat in
+/-- The Grassmannian functor as a `Sheaf`. -/
+@[simps!] noncomputable def sheaf (R : CommRingCat.{u}) (M : ModuleCat.{v} R) (k : ℕ) :
+    Sheaf (OverScheme.zariskiTopology (Spec R)) (Type (max u v)) where
+  val := (overSchemeOpEquivUnder R).functor ⋙ functor R M k
+  cond := by sorry
 
 variable (R A) in
 /-- The new collection of `k` elements that defines the chart after base change. -/
