@@ -292,7 +292,7 @@ Given an `R`-algebra `A`, we return the set `G(k, A ⊗[R] M; A)`. -/
   map_id _ := funext map_id
   map_comp f g := funext (map_comp (CommRingCat.toAlgHom f) (CommRingCat.toAlgHom g))
 
-open AlgebraicGeometry CommRingCat in
+open CommRingCat AlgebraicGeometry in
 /-- The Grassmannian functor as a `Sheaf`. -/
 @[simps!] noncomputable def sheaf (R : CommRingCat.{u}) (M : ModuleCat.{v} R) (k : ℕ) :
     Sheaf (OverScheme.zariskiTopology (Spec R)) (Type (max u v)) where
