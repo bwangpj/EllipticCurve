@@ -297,7 +297,9 @@ open CommRingCat AlgebraicGeometry in
 @[simps!] noncomputable def sheaf (R : CommRingCat.{u}) (M : ModuleCat.{v} R) (k : ℕ) :
     Sheaf (OverScheme.zariskiTopology (Spec R)) (Type (max u v)) where
   val := (overSchemeOpEquivUnder R).functor ⋙ functor R M k
-  cond := by sorry
+  cond := by
+    intro X S 𝒮 hS W hW
+    sorry
 
 variable (R A) in
 /-- The new collection of `k` elements that defines the chart after base change. -/
