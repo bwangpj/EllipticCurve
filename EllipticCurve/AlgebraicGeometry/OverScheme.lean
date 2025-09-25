@@ -248,32 +248,9 @@ end CategoryTheory.CostructuredArrow
 
 namespace CommRingCat
 
--- this shouldn't be in CommRingCat (?), but we put it here for now
 /-- The category of affine schemes over a fixed base scheme `𝒮`. -/
 abbrev OverScheme (𝒮 : Scheme.{u}) : Type (u + 1) :=
   CostructuredArrow Scheme.Spec 𝒮
-
--- -- mathlib #29927
--- instance {C : Type*} [Category C] {D : Type*} [Category D]
---     {F : C ⥤ D} [F.Faithful] [F.Full] [F.EssSurj] : F.IsEquivalence where
-
--- /-- The category of commutative rings under `R` is equivalent to
--- the opposite category of affine schemes over `Spec R`. -/
--- noncomputable def costructuredArrowAffineSchemeOpEquivUnder (R : CommRingCat.{u}) :
---     (CostructuredArrow AffineScheme.Spec (AffineScheme.of (Spec R)))ᵒᵖ ≌ Under R :=
---   let F₁ := StructuredArrow.pre (op (AffineScheme.of (Spec R))) AffineScheme.Spec.op (𝟭 _)
---   let F₂ :
---       StructuredArrow R (𝟭 CommRingCat) ⥤
---       StructuredArrow (AffineScheme.Spec.rightOp.obj R) (𝟭 AffineSchemeᵒᵖ) :=
---     StructuredArrow.map₂ (F := AffineScheme.Spec.rightOp) (𝟙 _) (𝟙 _)
---   (costructuredArrowOpEquivalence _ _).trans (F₁ ⋙ F₂.asEquivalence.inverse).asEquivalence
-
--- /-- Equivalence between `CostructuredArrow` for `AffineScheme`, and `OverScheme`. -/
--- noncomputable def costructuredArrowAffineSchemeEquivOverScheme (R : CommRingCat.{u}) :
---     CostructuredArrow AffineScheme.Spec (AffineScheme.of (Spec R)) ≌
---     OverScheme (Spec R) :=
---   (CostructuredArrow.map₂ (F := 𝟭 CommRingCatᵒᵖ) (G := AffineScheme.forgetToScheme)
---     (𝟙 _) (𝟙 _)).asEquivalence
 
 /-- The category of commutative rings under `R` is equivalent to
 the opposite category of affine schemes over `Spec R`. -/
@@ -281,8 +258,6 @@ noncomputable def overSchemeOpEquivUnder (R : CommRingCat.{u}) :
     (OverScheme (Spec R))ᵒᵖ ≌ Under R :=
   (costructuredArrowOpEquivalence _ _).trans
     (StructuredArrow.map₂ (F := opOp _) (G := Scheme.Spec.rightOp) (𝟙 _) (𝟙 _)).asEquivalence.symm
-  -- (costructuredArrowAffineSchemeEquivOverScheme R).symm.op.trans
-  --   (costructuredArrowAffineSchemeOpEquivUnder R)
 
 namespace OverScheme
 
